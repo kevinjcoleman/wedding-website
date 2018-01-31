@@ -56,7 +56,6 @@ export default {
     axios.get(`/invite_groups.json`)
     .then(response => {
       // JSON responses are automatically parsed.
-      console.log(response.data)
       this.inviteGroups = response.data.inviteGroups
     })
     .catch(e => {

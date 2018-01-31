@@ -137,9 +137,7 @@ export default {
           this.showSuccess = true
           axios.patch(`/invite_groups/${this.slug}`, this.invitees)
           .then(response => {
-            console.log(this.rsvped)
             this.rsvped = true
-            console.log(this.rsvped)
           })
           .catch(e => {
             console.log(e)
