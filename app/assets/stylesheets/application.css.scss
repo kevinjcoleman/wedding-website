@@ -9,6 +9,7 @@ $medium-navy: #26677F;
 $light-blue: #4CCEFF;
 $pink: #FF837C;
 
+
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: $white;
@@ -240,46 +241,6 @@ footer {
   }
 }
 
-@media (max-width: 768px) {
-  .home {
-    .display-4 {
-      font-size: 2.5rem;
-    }
-    .lead {
-      font-size: 1rem;
-    }
-  }
-  .registry {
-    .card {
-      margin: 1em 0;
-    }  
-    hr {
-      margin-bottom: 2em;
-    }
-    h1 {
-      font-size: 1.75rem;
-    }
-  }
-  .reveal { 
-    h1 {
-      font-size: 1.5em;
-    }
-    p {
-      font-size: 0.9em;
-    }
-  }  
-  .story-holder {
-    iframe {
-      width: 95%;
-    }
-  }
-  .rsvp {
-    .field {
-      width: 90% !important;
-    }
-  }
-}
-
 input {
   color: white !important;
   box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0.25) !important;
@@ -354,10 +315,79 @@ input {
       margin-top: 3px;
     }
     button {
-      margin-top: -20px;
+      margin-top: -10px;
     }
   }
   .plusone-button {
     margin-top: -10px; 
+  }
+  .btn {
+    width: 100%;
+  }
+  .form-control.is-invalid {
+    border-color: yellow !important;
+  }
+  .submit-buttons {
+      width: 100%;
+      margin: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    .display-4 {
+      font-size: 2.5rem;
+    }
+    .lead {
+      font-size: 1rem;
+    }
+  }
+  .registry {
+    .card {
+      margin: 1em 0;
+    }  
+    hr {
+      margin-bottom: 2em;
+    }
+    h1 {
+      font-size: 1.75rem;
+    }
+  }
+  .reveal { 
+    h1 {
+      font-size: 1.5em;
+    }
+    p {
+      font-size: 0.9em;
+    }
+  }  
+  .story-holder {
+    iframe {
+      width: 95%;
+    }
+  }
+  .rsvp {
+    .field {
+      width: 90% !important;
+    }
+  }
+  #invite {
+    .invite-section {
+      .custom-control {
+        margin-top: 10px;
+      }
+      button {
+        margin-top: 5px;
+      }
+    }
+    .plusone-button {
+      margin-top: 5px; 
+    }
+    .display-4 {
+      font-size: 2rem;
+    }
+    .lead {
+      font-size: 1em;
+    }
   }
 }

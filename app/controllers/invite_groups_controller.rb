@@ -11,5 +11,11 @@ class InviteGroupsController < ApplicationController
   
   def update 
     InviteGroup.find_by(slug: params[:id]).update_with_params(params["_json"])
+    head :ok
+  end 
+  
+  def cancel 
+    InviteGroup.find_by(slug: params[:invite_group_id]).update_attributes(rsvped: false)
+    head :ok
   end 
 end

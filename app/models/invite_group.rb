@@ -8,6 +8,7 @@ class InviteGroup < ApplicationRecord
     params.each do |invitee|
       self.invitees.find(invitee[:id]).update_attributes(invitee_params(invitee))
     end 
+    update_attributes!(rsvped: true)
   end 
   
   def invitee_params(invitee_param)

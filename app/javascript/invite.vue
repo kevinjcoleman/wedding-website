@@ -4,8 +4,73 @@
       <h1 class="display-4 text-center">Update Your Invitation</h1>
       <hr class="my-4">
       <p class="lead">Please update your invitation with your name if it needs edits, whether you will be attending or not whether you will be bringing a plus one.</p>
-      
-      
+      <hr class="my-4">
+      <div class="row text-center">
+        <p v-if='rsvped == null' class="lead text-center" style="color: black; margin: auto;"> 
+          Status: Unconfirmed
+        </p>
+        <p v-else-if='rsvped == true' class="lead text-center" style="color: green; margin: auto;"> 
+          Status: RSVP'd
+        </p>
+        <p v-else='rsvped == true' class="lead text-center" style="color: yellow; margin: auto;"> 
+          Status: Not attending
+        </p>
+      </div> 
+
+      <div class='row'>
+        <div class="col-10">
+          Name
+        </div>
+      </div>
+
+      <div class="" v-for="invitee in invitees">
+        <div class="row invite-section">
+          <div class='col-12 col-md-7'>
+            <b-form-input v-model="invitee.name"
+                      type="text"
+                      placeholder="Add name"
+                      :state="validInput(invitee.name)"
+                      @input="logChange(invitee.id)"></b-form-input>
+            <b-form-invalid-feedback>
+              <!-- This will only be shown if the preceeding input has an invalid state -->
+              You must enter a name.
+            </b-form-invalid-feedback>
+          </div>
+          <div class='col-12 col-sm-6 col-md-2 text-center'>
+            <b-form-checkbox v-model="invitee.confirmed"
+                             value="true"
+                             unchecked-value="false">
+              Attending
+            </b-form-checkbox>
+          </div>
+          <div class='col-12 col-sm-6 col-md-3'>
+            <b-btn v-if="(invitee.hasPlusOne == null || invitee.hasPlusOne == false) && invitee.plusOneEligible " variant="white" @click="invitee.hasPlusOne = !invitee.hasPlusOne">
+              Add plus one
+            </b-btn>          
+          </div>
+        </div>
+        <b-collapse class="mt-2" v-model="invitee.hasPlusOne" :id="invitee.id + 'collapse'">
+          <div class="row">
+            <div class='col-12 col-md-7'>
+              <b-form-input v-model="invitee.plusOneName"
+                        type="text"
+                        :state="validInput(invitee.plusOneName)"
+                        placeholder="Add name"></b-form-input>
+              <b-form-invalid-feedback>
+                <!-- This will only be shown if the preceeding input has an invalid state -->
+                You must enter a name or remove this plus one.
+              </b-form-invalid-feedback>
+            </div>
+            <div class='col-12 col-md-5'>
+              <b-btn v-if="invitee.plusOneEligible" class="plusone-button" variant="warning" @click="invitee.hasPlusOne = !invitee.hasPlusOne">
+                Remove plus one
+              </b-btn>  
+            </div>
+          </div>
+
+        </b-collapse>
+      </div>
+      <div style="margin-bottom: 1.5em;"></div>
       <b-alert variant="warning"
                dismissible
                :show="showAlert"
@@ -33,65 +98,11 @@
                @dismissed="showNoInvites=false">
         You've RSVP'd with no invites, please cancel your RSVP, or confirm for one of your invites.
       </b-alert>
-
-      <div class='row'>
-        <div class="col-10">
-          Name
-        </div>
-        <div class="col-2">
-          Attending
-        </div>
-      </div>
-
-      <div class="" v-for="invitee in invitees">
-        <div class="row invite-section">
-          <div class='col-10'>
-            <b-form-input v-model="invitee.name"
-                      type="text"
-                      placeholder="Add name"
-                      :state="validInput(invitee.name)"
-                      @input="logChange(invitee.id)"></b-form-input>
-            <b-form-invalid-feedback>
-              <!-- This will only be shown if the preceeding input has an invalid state -->
-              You must enter a name.
-            </b-form-invalid-feedback>
-          </div>
-          <div class='col-2'>
-            <b-form-checkbox v-model="invitee.confirmed"
-                             value="true"
-                             unchecked-value="false">
-            </b-form-checkbox>
-            <b-btn v-if="(invitee.hasPlusOne == null || invitee.hasPlusOne == false) && invitee.plusOneEligible " variant="white" @click="invitee.hasPlusOne = !invitee.hasPlusOne">
-              Add plus one <i class="fa fa-plus" aria-hidden="true"></i>
-            </b-btn>          
-          </div>
-        </div>
-        <b-collapse class="mt-2" v-model="invitee.hasPlusOne" :id="invitee.id + 'collapse'">
-          <div class="row">
-            <div class='col-10'>
-              <b-form-input v-model="invitee.plusOneName"
-                        type="text"
-                        :state="validInput(invitee.plusOneName)"
-                        placeholder="Add name"></b-form-input>
-              <b-form-invalid-feedback>
-                <!-- This will only be shown if the preceeding input has an invalid state -->
-                You must enter a name.
-              </b-form-invalid-feedback>
-            </div>
-            <div class='col-2'>
-              <b-btn v-if="invitee.plusOneEligible" class="plusone-button" variant="warning" @click="invitee.hasPlusOne = !invitee.hasPlusOne">
-                Remove plus one <i class="fa fa-times" aria-hidden="true"></i>
-              </b-btn>  
-            </div>
-          </div>
-
-        </b-collapse>
-      </div>
-      <div style="margin-bottom: 3em;"></div>
-      <b-button-group class="submit-buttons row">
+      <div style="margin-bottom: 1.5em;"></div>
+      <div class="submit-buttons row">
         <b-button @click="onSubmit" variant="success" class="col-md-6">RSVP</b-button>
         <b-button @click="cancelRsvp" variant="warning" class="col-md-6">Not attending</b-button>
-      </b-button-group>
+      </div>
     </div>
   </div>
 </template>
@@ -109,7 +120,8 @@ export default {
       showAlert: false,
       showSuccess: false,
       showNoInvites: false,
-      canceledRsvpSuccess: false
+      canceledRsvpSuccess: false,
+      rsvped: null
     }
   },
   methods: {
@@ -125,6 +137,9 @@ export default {
           this.showSuccess = true
           axios.patch(`/invite_groups/${this.slug}`, this.invitees)
           .then(response => {
+            console.log(this.rsvped)
+            this.rsvped = true
+            console.log(this.rsvped)
           })
           .catch(e => {
             console.log(e)
@@ -133,9 +148,6 @@ export default {
           this.showNoInvites = true
         }
       }
-    },
-    addPlusOne: function() {
-      console.log('adding plus one')
     },
     validInput: function(name) {
       if (name && name.length > 0 ) {
@@ -163,10 +175,16 @@ export default {
       _.each(this.invitees, function(invitee) {
         invitee.confirmed = false
       })
-      this.canceledRsvpSuccess = true
+      axios.post(`/invite_groups/${this.slug}/cancel`)
+      .then(response => {
+        this.canceledRsvpSuccess = true
+        this.rsvped = false
+      })
+      .catch(e => {
+        console.log(e)
+      })
     },
     hasConfirmedInvites: function() {
-      console.log('confirmed invites', _.filter(this.invitees, function(o) { return o.confirmed; }).length > 0)
       return  _.filter(this.invitees, function(o) { return o.confirmed; }).length > 0
     },
     cancelNotifications: function() {
@@ -183,9 +201,9 @@ export default {
     axios.get(`/invite_groups/${this.slug}.json`)
     .then(response => {
       // JSON responses are automatically parsed.
-      console.log(response.data)
       this.invitees = response.data.invitees
       this.inviteName = response.data.inviteName
+      this.rsvped = response.data.rsvped
     })
     .catch(e => {
       this.errors.push(e)
