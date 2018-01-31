@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <%= favicon_link_tag 'Wedding-Ring.png' %>
+
+    <title>Schmoellmania 2018</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <!-- Custom styles for this template -->
+  </head>
+
+  <body>
+
+    <div class="banner">
+      <img src="<%= asset_path( 'homepage.jpg' )%>">
+    </div>
+    
+    <main role="main">
+      <nav class="navbar navbar-expand-md navbar-light bg-faded">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <div class="zag"></div>
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item <%= nav_link_active('home') %> text-center">
+              <%= link_to 'The Couple', root_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item <%= nav_link_active('rsvp') %> text-center">
+              <%= link_to 'RSVP', rsvp_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item <%= nav_link_active('info') %> text-center">
+              <%= link_to 'Wedding Details', info_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item <%= nav_link_active('registry') %> text-center">
+              <%= link_to 'Registry', registry_path, class: 'nav-link' %>
+            </li>
+          </ul>
+          <div class="zag"></div>
+          
+        </div>
+      </nav>
+      <%= yield %>
+
+
+    </main>
+
+    <footer class="text-muted text-center">
+      <p>Built by the groom.</p>
+    </footer>
+  </body>
+</html>

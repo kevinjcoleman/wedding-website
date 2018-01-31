@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  invite_group: one
+  name: MyString
+  child: false
+
+two:
+  invite_group: two
+  name: MyString
+  child: false

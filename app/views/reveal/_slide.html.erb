@@ -1,0 +1,11 @@
+<section>
+  <% if defined?(header) %>
+    <h1><%= header %></h1>
+  <% end %>
+  <% if defined?(paragraph) %>
+    <p><%= paragraph %></p>
+  <% end %>
+  <% if defined?(image) %>
+    <img data-src="<%= image %>">
+  <% end %>  
+</section>

@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/lib/js/head.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/js/reveal.js"></script>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/css/reveal.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/css/theme/white.css" id="theme">
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<%= render 'slide', header: 'Our Story',													
+														paragraph: 'We met in a hopeless place: ATO, a dilapidated college house.',
+														image: 'https://pbs.twimg.com/media/ByvyoUpCMAASqJX.jpg' %>
+				<%= render 'slide', paragraph: 'We played played beer pong. (Kevin won..twice)',
+														image: 'http://collegexperience.net/wp-content/uploads/2016/11/beer-pong.jpg' %>
+				<%= render 'slide', paragraph: 'She made a Lord of the Rings quote.',
+														image: 'http://s2.quickmeme.com/img/69/6926853b67558cc8275646e96cf9d8dcadd868b239c30fbc4181492671b9d508.jpg' %>
+				<%= render 'slide', paragraph: 'And a week later, on September 11th 2013, while Nikki was taking care of a concussed Kevin, we started officially dating.',
+														image: 'https://thumbs.gfycat.com/RapidWateryCod-max-1mb.gif' %>														
+				<%= render 'slide', paragraph: 'We had a great fall with many memories, like hiking and Nikki\'s first legal drink.',
+														image: 'https://scontent-dft4-2.xx.fbcdn.net/v/t1.0-9/1392477_706207699389392_118815194_n.jpg?oh=58883023af96ccf06b96cfa09292848b&oe=5AD856C7' %>
+				<%= render 'slide', paragraph: 'And then Nikki was off to South Africa for 6 months.',
+														image: 'https://scontent-dft4-2.xx.fbcdn.net/v/t1.0-9/10491974_10152897239612990_6608721019176963185_n.jpg?oh=2b6b5f5c79becb66f2264055444497fe&oe=5B1EB564' %>
+				<%= render 'slide', paragraph: 'Halfway through, we were luckily enough to spend a week together when Kevin visited Nikki for Spring Break.',
+														image: 'https://scontent-dft4-2.xx.fbcdn.net/v/t1.0-9/969375_778694102140751_206056067_n.jpg?oh=bec09cb76c4270f4414d7abe789e6e9b&oe=5AE8A4E6' %>
+				<%= render 'slide', paragraph: 'A couple long months later, we were reunited and back in LA. We had a ton of adventures, and it was like no time had passed ❤️',
+														image: 'https://scontent-dft4-2.xx.fbcdn.net/v/t1.0-9/10556534_10152703669602990_4594921630271388917_n.jpg?oh=bd4cea9c4c5d4468f51eb180b23f40a1&oe=5B20E7B3' %>
+				<%= render 'slide', paragraph: 'We went to Vancouver',
+														image: 'https://scontent-dft4-2.xx.fbcdn.net/v/t31.0-8/1960894_10153040458512990_8327097260890947789_o.jpg?oh=9671f1170c527b7e43602aca7b3e6654&oe=5ADCE66B' %>
+				<%= render 'slide', paragraph: 'And a cruise to Mexico',
+														image: 'https://scontent-dft4-2.xx.fbcdn.net/v/t1.0-9/11061760_10153220301127990_8080528300290156146_n.jpg?oh=828cb5a7c2f2a252f820db03cb5bc1d6&oe=5AE7C5FD' %>
+				<%= render 'slide', paragraph: 'Then, we moved in together and promptly rescued our first cat, Kaya.',
+														image: "#{image_url('kaya.jpg')}" %>
+				<%= render 'slide', paragraph: 'We went to Ireland with Kevin\'s family.',
+														image: "https://scontent-dft4-2.xx.fbcdn.net/v/t1.0-9/1426315_1126904057319752_3944893988167657537_n.jpg?oh=abfbbb2318cb906279a125c4d028038c&oe=5AEBAFB4" %>
+				<%= render 'slide', paragraph: 'Rescued our second cat, Colby.', 
+														image: 'https://scontent-dft4-2.xx.fbcdn.net/v/t1.0-9/14595804_10154701289667990_333144820589206205_n.jpg?oh=2d164d6016d31af8330b83771ff2638d&oe=5AF147F5' %>
+				<%= render 'slide', paragraph: 'And then went to New York to meet Nikki\'s extended family.',
+														image: "https://scontent-dft4-2.xx.fbcdn.net/v/t31.0-8/13585135_1260600263950130_3576420134661767202_o.jpg?oh=8351809bcba57df2dbed671b1bf9de94&oe=5AE56EE5" %>
+				<%= render 'slide', paragraph: 'Before we knew it, we\'d been together for 3 years! When we were celebrating the occasion Kevin popped the question and Nikki said yes on September 12, 2016.',
+														image: 'https://scontent-dft4-2.xx.fbcdn.net/v/t1.0-9/14291682_1314862648523891_3275720795008286664_n.jpg?oh=3cf772b279103340d6f3df56d223f6b0&oe=5B22C0A9' %>
+				<%= render 'slide', paragraph: 'And now we are so excited to celebrate our special day with you! 👰🏼💍💐' %>
+			</div>
+		</div>
+		<script>
+			Reveal.initialize({height: "100%", width: "100%"});
+		</script>
+	</body>
+</html>
