@@ -1,11 +1,38 @@
 <template>
   <div id="admin">
-    <at-table :columns="columns" :data="inviteGroups.inviteGroups"></at-table>
+    <div class="row at-row">
+      <div class="col-xs-24 col-md-20 col-md-offset-2">
+        <h1>Admin</h1>
+      </div>
+      <div class="col-xs-24 col-md-10 col-md-offset-2">
+        <at-input v-model="searchTerm" @change="updateSearchTerm" placeholder="Please input" prepend-button>
+          <template slot="prepend">
+            <i class="icon icon-search"></i>
+          </template>
+        </at-input>
+      </div>
+      <div class="col-xs-24 col-md-10">
+        <at-select v-model="inviteStatusCategory" clearable style="width:100%">
+          <at-option value="attending">Attending</at-option>
+          <at-option value="not_attending">Not Attending</at-option>
+          <at-option value="unconfirmed">Unconfirmed</at-option>
+        </at-select>
+      </div>
+      <div class="col-xs-24 col-md-10 col-md-offset-2">
+        <p v-if="isSearching" style="text-align: left;">Current searched invite Count is {{ inviteCount }}</p>
+        <p v-else style="text-align: left;">Current invite count is {{ inviteCount }}</p>
+      </div>
+    </div>
+    <div class="row at-row">
+      <div class="col-md-20 col-md-offset-2">
+        <at-table :columns="columns" :data="inviteGroups"></at-table>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
 
 
 export default {
@@ -15,6 +42,10 @@ export default {
         {
           title: 'Name',
           key: 'name'
+        },
+        {
+          title: 'Invitees',
+          key: 'inviteeString'
         },
         {
           title: 'Attending',
@@ -32,12 +63,38 @@ export default {
       ]
     }
   },
-  computed: mapGetters([
-    'inviteGroups'
-  ]),
+  computed: {
+    ...mapGetters([
+      'inviteGroups',
+      'isSearching',
+      'inviteCount'
+    ]),
+    searchTerm: {
+      ...mapState({
+        get: state => state.searchTerm
+      }),
+      set (value) {
+        console.log(value)
+        this.$store.commit('updateSearchTerm', value)
+      }
+    },
+    inviteStatusCategory: {
+      ...mapState({
+        get: state => state.inviteStatusCategory
+      }),
+      set (value) {
+        console.log(value)
+        this.$store.commit('updateInviteStatusCategory', value)
+      }
+    }
+
+  },
   methods: {
     ...mapActions([
       'getInviteGroups'
+    ]),
+    ...mapGetters([
+      'searchInviteGroups'
     ]),
     inviteStatusString (status) {
       if (status === null) {
@@ -52,6 +109,10 @@ export default {
       } else {
         return status ? 'success' : 'danger'
       }
+    }, 
+    updateSearchTerm (e) {
+      console.log(e.target.value)
+      this.$store.commit('updateSearchTerm', e.target.value)
     }
   },
   created() {
