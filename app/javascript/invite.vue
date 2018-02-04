@@ -3,7 +3,7 @@
     <div class="jumbotron jumbotron-pink">
       <h1 class="display-4 text-center">Update Your Invitation</h1>
       <hr class="my-4">
-      <p class="lead">Please update your invitation with your name if it needs edits, whether you will be attending or not whether you will be bringing a plus one.</p>
+      <p class="lead">Please update your invitation with your name if it needs edits, whether you will be attending or not, and whether you will be bringing a plus one.</p>
       <hr class="my-4">
       <div class="row text-center">
         <p v-if='rsvped == null' class="lead text-center" style="color: black; margin: auto;"> 
