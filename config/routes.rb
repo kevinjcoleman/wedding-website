@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'rsvp', to: 'pages#rsvp', as: :rsvp
   get 'info', to: 'pages#info', as: :info
   get 'reveal', to: 'reveal#show', as: :reveal
+  get 'admin', to: 'admin#show', as: :admin
   resources :invite_groups do 
     post :cancel
   end 

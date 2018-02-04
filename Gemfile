@@ -28,6 +28,7 @@ gem "font-awesome-rails"
 gem 'friendly_id', '~> 5.1.0'
 gem 'pry-rails'
 gem "sentry-raven"
+gem 'httparty'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
