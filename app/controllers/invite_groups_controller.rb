@@ -10,12 +10,19 @@ class InviteGroupsController < ApplicationController
   end
   
   def update 
-    InviteGroup.find_by(slug: params[:id]).update_with_params(params["_json"])
+    group = InviteGroup.find_by(slug: params[:id])
+    group.update_with_params(params["_json"])
+    RsvpNotifier.new(group.reload).send
     head :ok
   end 
   
   def cancel 
-    InviteGroup.find_by(slug: params[:invite_group_id]).update_attributes(rsvped: false)
+    group = InviteGroup.find_by(slug: params[:invite_group_id])
+    group.update_attributes(rsvped: false)
+    group.invitees.find_each do |invitee|
+      invitee.update_attributes(confirmed: false)
+    end
+    RsvpNotifier.new(group.reload).send
     head :ok
   end 
 end
