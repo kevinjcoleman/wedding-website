@@ -394,3 +394,19 @@ input {
     font-size: 2rem !important;
   }
 }
+
+.accommodation.card {
+  border: 1px solid $pink;
+  .btn {
+    width: 100%;
+    background-color: $dark-navy;
+    border-color: $dark-navy;
+    &:active {
+      background-color: $medium-navy;
+      border-color: $medium-navy;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.2rem $medium-navy;
+    }
+  }
+}

@@ -5,7 +5,7 @@
         <h1>Admin</h1>
       </div>
       <div class="col-xs-24 col-md-10 col-md-offset-2">
-        <at-input v-model="searchTerm" @change="updateSearchTerm" placeholder="Please input" prepend-button>
+        <at-input v-model="searchTerm" @change="updateSearchTerm" placeholder="Search..." prepend-button>
           <template slot="prepend">
             <i class="icon icon-search"></i>
           </template>
@@ -48,13 +48,52 @@ export default {
           key: 'inviteeString'
         },
         {
-          title: 'Attending',
+          title: 'Attending?',
           render: (h, params) => {
             return h('div', [
               h('at-badge', {
                 props: {
                   value: this.inviteStatusString(params.item.rsvped),
                   status: this.inviteStatus(params.item.rsvped)
+                }
+              })
+            ])
+          }
+        },
+        {
+          title: 'Invitees',
+          render: (h, params) => {
+            return h('div', [
+              h('at-badge', {
+                props: {
+                  value: this.inviteeCount(params.item),
+                  status: 'success'
+                }
+              })
+            ])
+          }
+        },
+        {
+          title: 'Plus ones',
+          render: (h, params) => {
+            return h('div', [
+              h('at-badge', {
+                props: {
+                  value: this.plusOneCount(params.item),
+                  status: 'warning'
+                }
+              })
+            ])
+          }
+        },
+        {
+          title: 'Total Attending',
+          render: (h, params) => {
+            return h('div', [
+              h('at-badge', {
+                props: {
+                  value: this.totalAttendingCount(params.item),
+                  status: 'default'
                 }
               })
             ])
@@ -86,7 +125,8 @@ export default {
         console.log(value)
         this.$store.commit('updateInviteStatusCategory', value)
       }
-    }
+    },
+    
 
   },
   methods: {
@@ -111,8 +151,26 @@ export default {
       }
     }, 
     updateSearchTerm (e) {
-      console.log(e.target.value)
       this.$store.commit('updateSearchTerm', e.target.value)
+    },
+    inviteeCount (inviteGroup) {
+      return inviteGroup.invitees.length
+    },
+    plusOneCount (inviteGroup) {
+      return _.filter(inviteGroup.invitees, (o) => { 
+        return o.hasPlusOne
+     }).length
+    },
+    totalAttendingCount (inviteGroup) {
+      return _.reduce(inviteGroup.invitees, (sum, invitee) => {
+        if (inviteGroup.rsvped == true && invitee.confirmed == true && invitee.hasPlusOne == true) {
+          return sum + 2
+        } else if (inviteGroup.rsvped == true && invitee.confirmed == true) {
+          return sum + 1
+        } else {
+          return sum
+        }
+      }, 0)
     }
   },
   created() {
